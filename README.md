@@ -54,3 +54,9 @@ An example of Logging Hell™ dependencies:
                  ;; Include this layout
                  [log4-clj-layout "VERSION"]])
 ```
+
+## License
+
+Copyright © 2016 uSwitch Limited.
+
+Distributed under the Eclipse Public License, the same as Clojure.
