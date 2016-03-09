@@ -14,7 +14,7 @@ A flexible log4j layout for Clojure via slf4j.
 
 Put a `log4j.properties` on your classpath (`resources/log4j.properties`), add
 any custom key-vals to the output, and set the log formatting function
-(defaults to #'log4-clj-layout.layout/pprint-format).
+(defaults to `#'log4-clj-layout.layout/pprint-format`).
 ```ini
 log4j.rootCategory=INFO,STDOUT
 log4j.appender.STDOUT=org.apache.log4j.ConsoleAppender
@@ -46,11 +46,11 @@ An example of Logging Hell™ dependencies:
                  ;; Actually include Log4J
                  ;; Log4J is configured separatly via resources/log4j.properties
                  [log4j/log4j "LOG4J-VERSION"
-                 :exclusions [javax.mail/mail javax.jms/jms
-                 com.sun.jmdk/jmxtools com.sun.jmx/jmxri]]
+                  :exclusions [javax.mail/mail javax.jms/jms
+                               com.sun.jmdk/jmxtools com.sun.jmx/jmxri]]
                  ;; log-config for easy(er) clojure.tools.logging & slf4j config
                  [com.palletops/log-config "LOG-CONFIG-VERSION"
-                 :exclusions [org.clojure/tools.logging]]
+                  :exclusions [org.clojure/tools.logging]]
                  ;; Include this layout
                  [com.uswitch/log4-clj-layout "VERSION"]])
 ```
