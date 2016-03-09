@@ -84,6 +84,9 @@
 (defn pprint-format [event]
   (-> event common-format pprint with-out-str))
 
+(defn prn-format [event]
+  (-> event common-format prn-str))
+
 (def format-fn pprint-format)
 (def FORMAT_FN_PROPERTY (property "FormatFn"))
 (defn set-format-fn [s]
