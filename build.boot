@@ -12,7 +12,7 @@
 (require '[boot.core :as boot])
 
 (task-options!
- pom {:project 'com.uswitch/log4-clj-layout
+ pom {:project 'log4-clj-layout
       :version "0.1.0-SNAPSHOT"})
 
 (boot/deftask build []

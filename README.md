@@ -4,10 +4,10 @@ A flexible log4j layout for Clojure via slf4j.
 
 # Artifacts
 
-## `leiningen` / `boot`
+## `leiningen / boot`
 
 ``` clojure
-[com.uswitch/log4-clj-layout "0.1.0-SNAPSHOT"]
+[log4-clj-layout "0.1.0-SNAPSHOT"]
 ```
 
 # Usage
@@ -52,5 +52,5 @@ An example of Logging Hell™ dependencies:
                  [com.palletops/log-config "LOG-CONFIG-VERSION"
                   :exclusions [org.clojure/tools.logging]]
                  ;; Include this layout
-                 [com.uswitch/log4-clj-layout "VERSION"]])
+                 [log4-clj-layout "VERSION"]])
 ```
