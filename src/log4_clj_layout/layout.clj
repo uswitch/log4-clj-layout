@@ -66,7 +66,7 @@
           :err         (some-> event .getThrowableInformation .getThrowable)
           :raw-event   event}
          (merge (->> (.getProperties event)
-                     (map (juxt (comp keyword key) (comp save-read-edn val)))
+                     (map (juxt (comp keyword key) (comp safe-read-edn val)))
                      (into {}))))))
 
 (defn common-format [{:keys [err] :as event}]
