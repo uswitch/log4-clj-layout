@@ -13,7 +13,7 @@
 
 (task-options!
  pom {:project 'log4-clj-layout
-      :version "0.1.0"})
+      :version "0.1.1"})
 
 (boot/deftask build []
   (comp (aot :namespace '#{log4-clj-layout.layout}) (pom) (jar)))
