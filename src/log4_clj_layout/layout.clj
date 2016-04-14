@@ -46,6 +46,12 @@
                (catch java.net.UnknownHostException _
                  "unknown-host")))))
 
+(defn save-read-edn
+  [s]
+  (try
+    (clojure.edn/read-string s)
+    (catch RuntimeException e s)))
+
 (defn event->edn [^LoggingEvent event]
   (let [event-info (.getLocationInformation event)]
     (->> {:file        (.getFileName event-info)
@@ -60,7 +66,7 @@
           :err         (some-> event .getThrowableInformation .getThrowable)
           :raw-event   event}
          (merge (->> (.getProperties event)
-                     (map (juxt (comp keyword key) val))
+                     (map (juxt (comp keyword key) (comp save-read-edn val)))
                      (into {}))))))
 
 (defn common-format [{:keys [err] :as event}]
