@@ -46,7 +46,7 @@
                (catch java.net.UnknownHostException _
                  "unknown-host")))))
 
-(defn save-read-edn
+(defn safe-read-edn
   [s]
   (try
     (clojure.edn/read-string s)
