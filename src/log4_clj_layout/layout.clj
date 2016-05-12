@@ -82,7 +82,8 @@
       :always (->
                (update :timestamp render-ts)
                (update :level (comp string/lower-case str))
-               (dissoc :raw-event)))))
+               (dissoc :raw-event)
+               (dissoc :err)))))
 
 (defn json-format [event]
   (-> event common-format json/generate-string (str \newline)))
