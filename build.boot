@@ -1,6 +1,7 @@
 
 (set-env! :dependencies
-          '[[clj-time "0.11.0" :scope "provided"]
+          '[[org.clojure/clojure "1.7.0" :scope "provided"]
+            [clj-time "0.11.0" :scope "provided"]
             [cheshire "5.5.0" :scope "provided"]
             [org.slf4j/slf4j-api "1.7.18" :scope "provided"]
             [log4j/log4j "1.2.17"
