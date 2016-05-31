@@ -32,6 +32,13 @@ log4j.appender.STDOUT.layout.UserFields=field1:val1,field2:val2
 log4j.appender.STDOUT.layout.FormatFn=your-namespace.core/fancy-format
 ```
 
+## Env
+
+You can set `$APPLICATION` and/or `$TEAM` in your environment. This
+will override any properties set in log4j.properties.
+
+## Dependencies
+
 An example of Logging Hell™ dependencies:
 ``` clojure
 (defproject project-name "1.2.3"

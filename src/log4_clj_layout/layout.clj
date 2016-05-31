@@ -34,10 +34,14 @@
   (format/unparse (format/formatters :date-time) (coerce/from-long ts)))
 
 (defn get-user-fields []
-  (merge (some-> USER_FIELDS_PROPERTY
-                 System/getProperty
-                 user-fields-str->map)
-         user-fields))
+  (let [application (System/getenv "APPLICATION")
+        team (System/getenv "TEAM")]
+    (cond-> (merge (some-> USER_FIELDS_PROPERTY
+                           System/getProperty
+                           user-fields-str->map)
+                   user-fields)
+      application (assoc :application application)
+      team (assoc :team team))))
 
 (def get-hostname
   (memoize (fn []
