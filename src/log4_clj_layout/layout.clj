@@ -91,6 +91,14 @@
 (defn pprint-format [event]
   (-> event common-format pprint with-out-str))
 
+(defn pprint-stacktrace-format [event]
+  (-> event
+      common-format
+      pprint
+      with-out-str
+      (string/replace #"\\n" "\n")
+      (string/replace #"\\t" "\t")))
+
 (defn prn-format [event]
   (-> event common-format prn-str))
 
