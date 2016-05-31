@@ -14,7 +14,7 @@
 
 (task-options!
  pom {:project 'log4-clj-layout
-      :version "0.1.4"}
+      :version "0.1.5"}
  push {:repo "clojars"})
 
 (boot/deftask build []
