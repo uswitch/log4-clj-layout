@@ -14,7 +14,11 @@
 
 (task-options!
  pom {:project 'log4-clj-layout
-      :version "0.1.3"})
+      :version "0.1.4"}
+ push {:repo "clojars"})
 
 (boot/deftask build []
   (comp (aot :namespace '#{log4-clj-layout.layout}) (pom) (jar)))
+
+(boot/deftask deploy []
+  (comp (build) (install) (push)))
