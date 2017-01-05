@@ -73,13 +73,15 @@
                      (map (juxt (comp keyword key) (comp safe-read-edn val)))
                      (into {}))))))
 
-(defn common-format [{:keys [err] :as event}]
+(defn common-format [{:keys [err message] :as event}]
   (let [payload (->> (get-user-fields)
                      (merge event {:host (get-hostname)})
                      (filter val)
                      (into {}))]
     (cond-> payload
-      err (assoc :message (.getMessage err)
+      err (assoc :message (if-let [msg (.getMessage err)]
+                            (str message "\n" msg)
+                            message)
                  :exception true
                  :exception-type (str (type err))
                  :stacktrace (string/join "\n" (map str (.getStackTrace err))))
