@@ -12,7 +12,9 @@
               :methods [[getUserFields [] String]
                         [setUserFields [String] void]
                         [getFormatFn [] String]
-                        [setFormatFn [String] void]]
+                        [setFormatFn [String] void]
+                        [getRootKeyPrefix [] String]
+                        [setRootKeyPrefix [String] void]]
               :exposes-methods {activateOptions -activateOptions
                                 ignoresThrowable -ignoresThrowable}))
 
@@ -29,6 +31,14 @@
            (map #(some-> % (string/split #":")))
            (map (juxt (comp keyword first) second))
            (into {})))
+
+(def root-key-prefix nil)
+(def ROOT_KEY_PREFIX_PROPERTY (property "RootKeyPrefix"))
+
+(defn root-key [k]
+  (if root-key-prefix
+    (keyword (str root-key-prefix "_" (name k)))
+    k))
 
 (defn render-ts [ts]
   (format/unparse (format/formatters :date-time) (coerce/from-long ts)))
@@ -58,17 +68,17 @@
 
 (defn event->edn [^LoggingEvent event]
   (let [event-info (.getLocationInformation event)]
-    (->> {:file        (.getFileName event-info)
-          :line-number (.getLineNumber event-info)
-          :class       (.getClassName event-info)
-          :method      (.getMethodName event-info)
-          :thread      (.getThreadName event)
-          :timestamp   (.getTimeStamp event)
-          :ndc         (.getNDC event)
-          :message     (.getRenderedMessage event)
-          :level       (.getLevel event)
-          :err         (some-> event .getThrowableInformation .getThrowable)
-          :raw-event   event}
+    (->> {(root-key :file)        (.getFileName event-info)
+          (root-key :line-number) (.getLineNumber event-info)
+          (root-key :class)       (.getClassName event-info)
+          (root-key :method)      (.getMethodName event-info)
+          (root-key :thread)      (.getThreadName event)
+          (root-key :ndc)         (.getNDC event)
+          :timestamp              (.getTimeStamp event)
+          :level                  (.getLevel event)
+          :message                (.getRenderedMessage event)
+          :err                    (some-> event .getThrowableInformation .getThrowable)
+          :raw-event              event}
          (merge (->> (.getProperties event)
                      (map (juxt (comp keyword key) (comp safe-read-edn val)))
                      (into {}))))))
@@ -130,6 +140,11 @@
   (let [parsed (user-fields-str->map s)]
     (println "Setting user fields:" (pr-str parsed))
     (alter-var-root #'user-fields (constantly parsed))))
+
+(defn -getRootKeyPrefix [this] (System/getProperty ROOT_KEY_PREFIX_PROPERTY))
+(defn -setRootKeyPrefix [this s]
+  (println "Setting root key prefix:" s)
+  (alter-var-root #'root-key-prefix (constantly s)))
 
 (defn -getFormatFn [this] (System/getProperty FORMAT_FN_PROPERTY))
 (defn -setFormatFn [this s] (set-format-fn s))
