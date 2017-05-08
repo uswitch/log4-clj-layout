@@ -13,7 +13,7 @@
 (require '[boot.core :as boot])
 
 (task-options!
- pom {:project 'log4-clj-layout :version "0.1.6"}
+ pom {:project 'log4-clj-layout :version "0.1.7"}
  push {:repo "clojars"})
 
 (boot/deftask build []
