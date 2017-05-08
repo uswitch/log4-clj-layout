@@ -12,6 +12,11 @@
 
 (require '[boot.core :as boot])
 
+(set-env! :repositories 
+          [["clojars" {:url "https://clojars.org/repo/"
+                       :username (System/getenv "CLOJARS_USER")
+                       :password (System/getenv "CLOJARS_PASS")}]])
+
 (task-options!
  pom {:project 'log4-clj-layout :version "0.1.7"}
  push {:repo "clojars"})
