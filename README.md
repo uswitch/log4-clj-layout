@@ -32,6 +32,17 @@ log4j.appender.STDOUT.layout.UserFields=field1:val1,field2:val2
 log4j.appender.STDOUT.layout.FormatFn=your-namespace.core/fancy-format
 ```
 
+## Root Key Prefixes
+
+Some keys emitted by default such as `:file`, `:method`, `:class`,
+etc., may clash with keys you wish to emit from software. A prefix to
+the default root keys can be set so as not to conflict with
+application keys.
+
+``` ini
+log4j.appender.STDOUT.layout.RootKeyPrefix=java
+```
+
 ## Env
 
 You can set `$APPLICATION` and/or `$TEAM` in your environment. This
