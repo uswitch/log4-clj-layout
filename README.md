@@ -7,7 +7,7 @@ A flexible log4j layout for Clojure via slf4j.
 ## `leiningen / boot`
 
 ``` clojure
-[log4-clj-layout "0.1.6"]
+[![Clojars Project](https://img.shields.io/clojars/v/log4-clj-layout.svg)](https://clojars.org/log4-clj-layout)
 ```
 
 # Usage
