@@ -51,25 +51,29 @@ will override any properties set in log4j.properties.
 
 An example of Logging Hell™ dependencies:
 ``` clojure
-(defproject project-name "1.2.3"
-  ;; ...
-  :dependencies [;; SLF4J is a common interface to any logger implementation.
-                 [org.slf4j/slf4j-api "SLF4J-VERSION"] ; The interface
+(def slf4j-version "1.7.25")
+
+(defproject testing "0.1.0-SNAPSHOT"
+  :main testing.core
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [org.clojure/tools.logging "0.3.1"]
+
+                 [cheshire "5.5.0"]
+                 [clj-time "0.11.0"]
+
+                 ;; SLF4J is a common interface to any logger implementation.
+                 [org.slf4j/slf4j-api ~slf4j-version] ; The interface
                  ;; Redirect logs into SLF4J from various places
-                 [org.slf4j/jul-to-slf4j "SLF4J-VERSION"]
-                 [org.slf4j/jcl-over-slf4j "SLF4J-VERSION"]
+                 [org.slf4j/jul-to-slf4j ~slf4j-version]
+                 [org.slf4j/jcl-over-slf4j ~slf4j-version]
                  ;; Use Log4J as the implementation for the SLF4J interface.
-                 [org.slf4j/slf4j-log4j12 "SLF4J-VERSION"]
+                 [org.slf4j/slf4j-log4j12 ~slf4j-version]
                  ;; Actually include Log4J
                  ;; Log4J is configured separatly via resources/log4j.properties
-                 [log4j/log4j "LOG4J-VERSION"
+                 [log4j/log4j "1.2.17"
                   :exclusions [javax.mail/mail javax.jms/jms
                                com.sun.jmdk/jmxtools com.sun.jmx/jmxri]]
-                 ;; log-config for easy(er) clojure.tools.logging & slf4j config
-                 [com.palletops/log-config "LOG-CONFIG-VERSION"
-                  :exclusions [org.clojure/tools.logging]]
-                 ;; Include this layout
-                 [log4-clj-layout "VERSION"]])
+                 [log4-clj-layout "0.2.0-SNAPSHOT"]])
 ```
 
 ## License
