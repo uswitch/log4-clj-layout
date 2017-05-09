@@ -13,7 +13,8 @@
 (require '[boot.core :as boot])
 
 (set-env! :repositories 
-          [["clojars" {:url "https://clojars.org/repo/"
+          [["central" {:url "https://repo1.maven.org/maven2"}]
+           ["clojars" {:url "https://clojars.org/repo/"
                        :username (System/getenv "CLOJARS_USER")
                        :password (System/getenv "CLOJARS_PASS")}]])
 
