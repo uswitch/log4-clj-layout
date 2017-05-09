@@ -19,7 +19,7 @@
                        :password (System/getenv "CLOJARS_PASS")}]])
 
 (task-options!
- pom {:project 'log4-clj-layout :version "0.1.7"}
+ pom {:project 'log4-clj-layout :version "0.2.0"}
  push {:repo "clojars"})
 
 (boot/deftask build []
