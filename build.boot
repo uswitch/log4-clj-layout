@@ -22,7 +22,7 @@
  push {:repo "clojars"})
 
 (boot/deftask build []
-  (comp (pom) (jar)))
+  (comp (aot :namespace '#{log4-clj-layout.layout}) (pom) (jar)))
 
 (boot/deftask deploy []
   (comp (build) (install) (push)))
