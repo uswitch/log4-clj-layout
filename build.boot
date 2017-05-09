@@ -1,4 +1,3 @@
-
 (set-env! :dependencies
           '[[org.clojure/clojure "1.7.0" :scope "provided"]
             [clj-time "0.11.0" :scope "provided"]
@@ -18,8 +17,11 @@
                        :username (System/getenv "CLOJARS_USER")
                        :password (System/getenv "CLOJARS_PASS")}]])
 
+(def +version+  "0.2.0")
+(def +snapshot+ (str +version+ "-SNAPSHOT"))
+
 (task-options!
- pom {:project 'log4-clj-layout :version "0.2.0"}
+ pom {:project 'log4-clj-layout :version +version+}
  push {:repo "clojars"})
 
 (boot/deftask build []
